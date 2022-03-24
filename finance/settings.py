@@ -1,7 +1,6 @@
 from pathlib import Path
 import os
 from django.contrib import messages
-# import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -119,29 +118,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[BASE_DIR/'static']
 STATIC_ROOT = os.path.join("Static_root")
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# MESSAGE_TAGS={
-#     messages.ERROR:"danger"
-# }
-
-#email config
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST=config('EMAIL_HOST')
-# EMAIL_PORT=config('EMAIL_PORT')
-# EMAIL_HOST_USER=config('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
-# EMAIL_USE_TLS=False
-# EMAIL_USE_SSL=True
-
-# django_heroku.settings(locals())
-
-# if not DEBUG:
-#     SECURE_PROXY_SSL_HEADER =('HTTP_X_FORWARDED_PROTO',"https")
-#     SECURE_SSL_REDIRECT=True
-#     CSRF_COOKIE_SECURE=True
-#     SECURE_HSTS_PRELOAD=True
-#     ALLOWED_HOSTS=[".herokuapp.com"]
