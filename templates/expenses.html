@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Expenses Section{% endblock title %}
+{% block content %}
+
+  <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
+
+  <a href="{% url 'expenses:add' %}"><button type="submit" class="btn btn-success btn-sm mt-1 mb-1" >Add Expenses</button></a>
+  <a href="{% url 'expenses:export' %}" class="btn btn-danger btn-sm">Export data</a>
+  <div class="table-responsive mt-3">
+    <table class="table table-lg table-borderless table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Number</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Description</th>
+          <th scope="col">Category</th>
+          <th scope="col">Date</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in data %}
+        <tr>
+          <td scope="row">{{ forloop.counter }}</td>
+          <td>{{i.amount}}</td>
+          <td>{{i.description}}</td>
+          <td>{{i.category}}</td>
+          <td>{{i.date}}</td>
+          <td><a href="{% url 'expenses:edit' i.pk %}" class="btn btn-sm btn-outline-success">Edit</a>
+          <a href="{% url 'expenses:delete' i.pk %}" class="btn btn-sm btn-outline-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination-container">
+    <div class="page-item">
+      Showing page {{page_obj.number}} of {{ page_obj.paginator.num_pages }}
+    </div>
+
+    <ul class="pagination justify-content-end">
+      {% if page_obj.has_previous %}
+      <li {% if page_obj.number == 1 %} class="page-item active" {% endif %}><a class="page-link" href="?page=1">&laquo; 1</a></li>
+      <li class="page-item"> <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+      {% endif %}
+
+      {% if page_obj.has_next %}
+      <li class="page-item"> <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+      <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages}} &raquo;</a></li>
+      {% endif %}
+
+      </ul>
+      <div class="chart">
+        <canvas id="myChart" style="height: 50%; width:50%;"></canvas>
+      </div>
+   
+ 
+      <script src="{% static 'js/stats.js' %}"> </script>
+{% endblock %}

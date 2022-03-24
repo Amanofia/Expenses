@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+
+{% block title %}
+{% if edit %}
+Edit Expenses
+{% else %}
+Add New Expenses
+{% endif %}
+{% endblock title %}
+
+{% block content %}
+{% if edit %}
+  <h2></h2>
+  <form class="form" method="post" action="{% url 'expenses:edit' ele.pk%}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label class="form-label" >Amount</label>
+        <input class="form-control" type="text" name="amount" value="{{ele.amount}}"/>
+    </div>  
+    <div class="mb-3">
+        <label class="form-label">Category</label>
+        <select class="form-select form-select-md" name='category'>
+            <option value="{{ele.category}}" selected>{{ele.category}}</option>
+           {% for i in category %}
+            <option value="{{i.name}}">{{i.name}}</option>
+           {% endfor %}
+        </select>
+    </div>  
+    <div class="mb-3">
+        <label class="form-label" >Date {{ele.date}}</label>
+        <input placeholder="Date" name="date" class="form-control" type="text" onfocus="(this.type='date')" value="{{ele.date|date:'Y-m-d'}}" id="date">
+        <!-- <input class="form-control" value="{{ele.date|date:'d/m/y'}}" type="date" name="date" /> -->
+    </div>  
+    <div class="mb-3">
+        <label class="form-label" >Description</label>
+        <input class="form-control" type="text" name="description" value="{{ele.description}}" />
+    </div>  
+      <input type="submit" class="btn btn-primary" />
+  </form>
+  {% else %}
+
+  <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
+  <h2></h2>
+  <form class="form" method="post" action="{% url 'expenses:add' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label class="form-label" >Amount</label>
+        <input class="form-control" type="text" name="amount"/>
+    </div>  
+    <div class="mb-3">
+        <label class="form-label">Category</label>
+        <select class="form-select form-select-md" name='category'>
+           {% for i in category %}
+            <option value="{{i.name}}">{{i.name}}</option>
+           {% endfor %}
+        </select>
+    </div>  
+    <div class="mb-3">
+        <label class="form-label" >Date</label>
+        <input placeholder="Date" name="date" class="form-control" type="text" onfocus="(this.type='date')" id="date">
+    </div>  
+    <div class="mb-3">
+        <label class="form-label" >Description</label>
+        <input class="form-control" type="text" name="description"/>
+    </div>  
+      <input type="submit" class="btn btn-primary" />
+  </form>
+  {% endif %}
+  {% endblock content %}
+

@@ -1,0 +1,70 @@
+{%load static%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Finance Tracker</title>
+
+    <!-- Bootstrap core CSS -->
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+<!-- <script src="{% static 'js/index.js' %}"></script> -->
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="{% static 'js/index.js' %}"></script>
+<meta name="theme-color" content="#7952b3">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+  </head>
+  <body style="color:darkslategray;">
+    
+    <header class="navbar navbar-dark sticky-top bg-info flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/">Menu</a>
+
+
+        <img src="{% static 'img1.png' %}" style="width: 175px;" alt="">
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            {% if user.is_authenticated %}
+              <form method="post" action="{% url 'auth:logout' %}">
+                {% csrf_token %}
+               <button class="btn btn-md btn-danger" type="submit">Logout</button>
+              </form>
+
+            {% else %}
+                      <a class="btn btn-md btn-success" href="{% url 'auth:login' %}">Login</a>
+            {% endif %}
+        </li>
+      </ul>
+    </header>
+    
+    <div class="container-fluid">
+      <div class="row">
+        {% include "sider.html" %}
+    
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">{% block title %}Dashboard{% endblock title %}</h1>
+          </div>
+          {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="alert alert-lg alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
+              {% endfor %}
+          </ul>
+          {% endif %}
+            {% block content %}
+            
+            {% endblock content %}
+      </div>
+      </main>
+      
+    </div>
+
+    
+
+  <script src="{% static 'js/min.js' %}"></script>
+</body>
+
+</html>

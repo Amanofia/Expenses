@@ -1,0 +1,281 @@
+body {
+    font-size: .875rem;
+  }
+  p{
+    margin-bottom:0rem;
+  }
+  .feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+  }
+  .alert{
+    padding:0.1rem 0.1rem;
+    border-radius:0.6rem;
+    margin-bottom: 0;
+  }
+  
+  /*
+   * Sidebar
+   */
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    /* rtl:raw:
+    right: 0;
+    */
+    bottom: 0;
+    /* rtl:remove */
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 48px 0 0; /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  }
+  
+  @media (max-width: 767.98px) {
+    .sidebar {
+      top: 5rem;
+    }
+  }
+  
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  }
+  
+  .sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #727272;
+  }
+  
+  .sidebar .nav-link.active {
+    color: #007bff;
+  }
+  
+  .sidebar .nav-link:hover .feather,
+  .sidebar .nav-link.active .feather {
+    color: inherit;
+  }
+  
+  .sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+  }
+  
+  /*
+   * Navbar
+   */
+  
+  .navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, .25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+  }
+  
+  .navbar .navbar-toggler {
+    top: .25rem;
+    right: 1rem;
+  }
+  
+  .navbar .form-control {
+    padding: .75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+  }
+  
+  .form-control-dark {
+    color: #fff;
+    background-color: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .1);
+  }
+  
+  .form-control-dark:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+  }
+  @import url("https://fonts.googleapis.com/css2?family=Recursive&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100px;
+}
+@media (max-width: 768px) {
+  html {
+    font-size: calc(100vw / 768 * 100);
+  }
+}
+
+body {
+  min-height: 100vh;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  font-family: "Recursive", sans-serif;
+  font-size: 0.2rem;
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  z-index: 1;
+}
+
+.bg-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1cb0d1;
+  background: url("https://images.unsplash.com/photo-1608497735578-11912e18ed9f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
+  z-index: -1;
+  display: flex;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+.bg-box div {
+  flex: 1;
+  margin: 0 0.3rem;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  border-radius: 0.5rem;
+}
+.bg-box .bg1 {
+   /* background-image: url(https://i.pinimg.com/564x/df/d1/c6/dfd1c65d0c56a14cd7615e3ffa80287e.jpg);  */
+  background-position: left center;
+  background-size: 70% auto;
+  -webkit-animation: fadeinBottom 1s both;
+          animation: fadeinBottom 1s both;
+}
+.bg-box .bg2 {
+  background-position: right center;
+  background-size: 70% auto;
+  -webkit-animation: fadeinTop 1s 0.3s both;
+          animation: fadeinTop 1s 0.3s both;
+}
+
+.form {
+  margin: auto;
+  width: 5rem;
+  padding: 0.5rem;
+  color: #07417d;
+  
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 1rem 0 1rem 0;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.form label {
+  display: block;
+  font-weight: bold;
+}
+.form input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  display: block;
+  width: 100%;
+  margin: 0.1rem 0 0.2rem;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.1rem 0.3rem;
+  padding-left: 0.5rem;
+  font-family: inherit;
+}
+.form input:focus, .form input:focus-within {
+  outline: none;
+  box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.5);
+}
+.form ion-icon {
+  font-size: 1.2em;
+}
+.form .input-box {
+  position: relative;
+}
+.form .prefix {
+  position: absolute;
+  color: lightgrey;
+  top: 0;
+  bottom: 0;
+  left: 0.2rem;
+  margin: auto;
+}
+.form .switch-btn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding: 0.2rem;
+  margin: auto;
+  cursor: pointer;
+}
+.form .send-btn {
+  display: inline-block;
+  padding: 0.1rem 0.3rem;
+  color: #fff;
+  background-color: #286aaf;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+.form .send-btn ion-icon {
+  vertical-align: middle;
+}
+
+@-webkit-keyframes fadeinBottom {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(1rem);
+  }
+}
+
+@keyframes fadeinBottom {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(1rem);
+  }
+}
+@-webkit-keyframes fadeinTop {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-1rem);
+  }
+}
+@keyframes fadeinTop {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-1rem);
+  }
+}

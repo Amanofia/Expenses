@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Expenses Statics{% endblock title %}
+{% block content %}
+
+<div class="chart">
+    <canvas id="myChart2" class="chart-item mt-5"></canvas>
+    <canvas id="myChart3" class="chart-item mt-5"></canvas>
+</div>
+<style>
+   
+    .chart{
+         height:100vh; width:auto;
+    }
+</style>
+
+ 
+<script src="{% static 'js/stats.js' %}"> </script>
+{% endblock content %}
