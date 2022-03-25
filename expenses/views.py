@@ -13,7 +13,6 @@ import datetime
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.image as img
 import pandas as pd
 import datetime as dt
 from sklearn.model_selection import train_test_split
