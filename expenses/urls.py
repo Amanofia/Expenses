@@ -10,4 +10,5 @@ urlpatterns = [
     path('stat/', views.stat, name='stat'),
     path('expenses/statapi/', views.stat_api, name='statapi'),
     path('data/', views.exportdata, name='export'),
+    path('pred/', views.data_pred, name='pred'),
 ]

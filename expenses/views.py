@@ -1,14 +1,23 @@
+import base64
+import io
+import urllib
+
 from django.shortcuts import redirect, render
 from .models import *
 from django.contrib.auth.decorators import login_required
-import os
-from django.conf import settings as s
-import json
+from django.conf import settings
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse
 import datetime
 import csv
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.image as img
+import pandas as pd
+import datetime as dt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 
 
 def dashboard(request):
@@ -115,7 +124,42 @@ def exportdata(request):
     res['Content-Disposition'] = 'attachment; filename=Expense_Data' + str(datetime.datetime.now()) + '.csv'
     writer = csv.writer(res)
     writer.writerow(['Amount', 'Category', 'Date', 'Description'])
-
     for i in data:
         writer.writerow([i.amount, i.category, i.date, i.description])
     return res
+
+@login_required(login_url='/auth/login/')
+def data_pred(request):
+    data = Expenses.objects.filter(owner=request.user)
+    response = HttpResponse(content_type="image/png")
+    response['Content-Disposition'] = 'attachment; filename=pred' + str(datetime.datetime.now()) + '.png'
+    asd = []
+    for i in data:
+        asd.append([int(i.amount), i.category, i.date.strftime("%d/%m/%Y"), i.description])
+
+    numpy_array = np.asarray(asd)
+    x = [i[2] for i in asd]
+    y = [int(i[0]) for i in asd]
+    y = np.asarray(y)
+    x = pd.to_datetime(x, format="%d/%m/%Y")
+    X = x.map(dt.datetime.toordinal)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=.7, random_state=42)
+    model = LinearRegression()
+    model.fit(X_train.values.reshape(-1, 1), y_train)
+    model.score(X_train.values.reshape(-1, 1), y_train)
+    y_pred = model.predict(X_test.values.reshape(-1, 1))
+
+    plt.scatter(X_train.values.reshape(-1, 1), y_train, color='red')
+    plt.plot(X_train, model.predict(X_train.values.reshape(-1, 1)), color='blue')
+    plt.title('Amount')
+    plt.xlabel('Date')
+    plt.ylabel('Amount')
+
+    plt.scatter(X_test.values.reshape(-1, 1), y_test, color='red')
+    plt.plot(X_train.values.reshape(-1, 1), model.predict(X_train.values.reshape(-1, 1)), color='blue')
+    plt.title('Amount')
+    plt.xlabel('Date')
+    plt.ylabel('Amount')
+
+    plt.savefig(response, format="png")
+    return response
